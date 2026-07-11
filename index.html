@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Silvas — A Private Guest Suite in Tucson · AI&amp;I</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --bg:#F7F4EE;
+    --surface:#FFFFFF;
+    --surface2:#FBF8F1;
+    --text:#1C1A17;
+    --muted:#8A837A;
+    --gold:#B8963E;
+    --gold2:#D4AC58;
+    --terracotta:#B1502F;
+    --green:#2D7A4F;
+    --blue:#2A5FA8;
+    --border:rgba(100,90,76,0.18);
+    --shadow-sm:0 2px 10px rgba(28,20,14,0.06);
+    --shadow-md:0 12px 34px rgba(28,20,14,0.10);
+    --shadow-lg:0 26px 64px rgba(28,20,14,0.16);
+    --grad-hero: linear-gradient(135deg, #241A12 0%, #5B3A22 38%, #B1502F 78%, #D4AC58 100%);
+    --grad-band: linear-gradient(135deg, #F4E6C8 0%, #EFD3B8 100%);
+    color-scheme: light;
+  }
+  [data-theme="dark"]{
+    --bg:#020817;
+    --surface:#0A1628;
+    --surface2:#0D1D36;
+    --text:#E0F0FF;
+    --muted:#7AA6CC;
+    --gold:#F0C040;
+    --gold2:#FFD873;
+    --terracotta:#00AEFF;
+    --green:#00E5CC;
+    --blue:#33C2FF;
+    --border:rgba(0,174,255,0.20);
+    --shadow-sm:0 2px 14px rgba(0,174,255,0.14);
+    --shadow-md:0 16px 44px rgba(0,174,255,0.16);
+    --shadow-lg:0 30px 76px rgba(0,229,204,0.18);
+    --grad-hero: linear-gradient(135deg, #020817 0%, #0A1628 35%, #00AEFF 78%, #00E5CC 100%);
+    --grad-band: linear-gradient(135deg, #0A1628 0%, #0D2545 100%);
+    color-scheme: dark;
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Outfit', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    transition:background .35s ease, color .35s ease;
+  }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 20px; }
+  .narrow{ max-width:740px; margin:0 auto; padding:0 20px; }
+
+  h1,h2,h3{ font-family:'Playfair Display', serif; color:var(--text); }
+  .eyebrow{
+    font-family:'DM Mono', monospace; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- nav ---------- */
+  .topnav{
+    position:sticky; top:0; z-index:100;
+    background:color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .topnav-inner{
+    max-width:1080px; margin:0 auto; padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+  }
+  .brand{
+    font-family:'Bebas Neue', sans-serif; font-size:20px; letter-spacing:3px; color:var(--gold);
+  }
+  .nav-links{ display:none; gap:22px; font-family:'DM Mono', monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .nav-links a{ color:inherit; text-decoration:none; }
+  .nav-links a:hover{ color:var(--text); }
+  @media(min-width:760px){ .nav-links{ display:flex; } }
+  .theme-toggle{
+    display:flex; align-items:center; gap:6px;
+    background:var(--surface); border:1px solid var(--border); border-radius:999px;
+    padding:7px 12px 7px 10px; cursor:pointer;
+    font-family:'DM Mono', monospace; font-size:10.5px; letter-spacing:.06em; color:var(--muted);
+  }
+  .theme-toggle svg{ width:13px; height:13px; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; background:var(--grad-hero); color:#FFF7EA;
+    padding:64px 20px 190px; text-align:center; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(circle at 20% 20%, rgba(255,255,255,.14), transparent 45%),
+                      radial-gradient(circle at 85% 80%, rgba(255,255,255,.10), transparent 45%);
+  }
+  .hero-inner{ position:relative; max-width:640px; margin:0 auto; }
+  .hero .eyebrow{ color:rgba(255,247,234,.85); }
+  .hero h1{
+    font-size:clamp(40px,9vw,72px); font-weight:900; line-height:1.02; margin:18px 0 14px; color:#FFF7EA;
+  }
+  .hero .sub{
+    font-family:'Playfair Display', serif; font-style:italic; font-weight:400;
+    font-size:clamp(17px,3vw,21px); color:rgba(255,247,234,.92);
+    max-width:480px; margin:0 auto 28px;
+  }
+  .badges{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+  .badge{
+    font-family:'DM Mono', monospace; font-size:11px; letter-spacing:.05em;
+    background:rgba(255,247,234,.14); border:1px solid rgba(255,247,234,.3);
+    color:#FFF7EA; padding:7px 14px; border-radius:999px;
+  }
+
+  /* ---------- intro card (overlaps hero) ---------- */
+  .intro-card{
+    position:relative; z-index:5; background:var(--surface);
+    border-radius:22px; box-shadow:var(--shadow-lg);
+    padding:44px 30px; margin:-140px auto 0; max-width:820px;
+  }
+  .intro-card p{ color:var(--muted); font-size:16.5px; margin-bottom:14px; }
+  .intro-card p:last-child{ margin-bottom:0; }
+  .dropcap:first-letter{
+    font-family:'Playfair Display', serif; font-weight:900; font-size:60px; line-height:.7;
+    float:left; padding:4px 10px 0 0; color:var(--terracotta);
+  }
+  @media(min-width:760px){ .intro-card{ padding:56px 60px; margin-top:-150px; } }
+
+  /* ---------- section shell ---------- */
+  section{ padding:64px 0; }
+  .section-head{ margin-bottom:30px; }
+  .section-head h2{ font-size:clamp(26px,5vw,36px); margin:10px 0 8px; }
+  .section-head p{ color:var(--muted); max-width:58ch; }
+
+  /* ---------- never go hungry band ---------- */
+  .hungry-band{ background:var(--grad-band); }
+  [data-theme="dark"] .hungry-band .section-head h2,
+  [data-theme="dark"] .hungry-band .section-head p{ color:var(--text); }
+  .hungry-band .section-head h2{ color:#3B2313; }
+  [data-theme="dark"] .hungry-band .section-head h2{ color:#F3E7DC; }
+  .hungry-band .section-head p{ color:#5C3D22; }
+  [data-theme="dark"] .hungry-band .section-head p{ color:#CFE3F5; }
+  .hungry-grid{ display:grid; grid-template-columns:1fr; gap:16px; }
+  @media(min-width:680px){ .hungry-grid{ grid-template-columns:1.1fr .9fr; align-items:center; } }
+  .hungry-photos{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .hungry-photos img{ border-radius:14px; box-shadow:var(--shadow-md); aspect-ratio:4/3; object-fit:cover; }
+  .hungry-copy h3{ font-size:26px; margin-bottom:12px; color:#3B2313; }
+  [data-theme="dark"] .hungry-copy h3{ color:#F3E7DC; }
+  .hungry-copy p{ color:#5C3D22; margin-bottom:14px; }
+  [data-theme="dark"] .hungry-copy p{ color:#CFE3F5; }
+  .hungry-list{ list-style:none; }
+  .hungry-list li{ display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; color:#5C3D22; font-size:15px; }
+  [data-theme="dark"] .hungry-list li{ color:#CFE3F5; }
+  .hungry-list li::before{ content:"✓"; color:var(--terracotta); font-weight:700; }
+
+  /* ---------- gallery ---------- */
+  .gal-group{ margin-bottom:44px; }
+  .gal-group:last-child{ margin-bottom:0; }
+  .gal-group h3{
+    font-family:'DM Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .gal-group h3::after{ content:""; flex:1; height:1px; background:var(--border); }
+  .gal-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
+  @media(min-width:560px){ .gal-grid{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:900px){ .gal-grid{ grid-template-columns:1fr 1fr 1fr; } }
+  .gal-item{ position:relative; border-radius:14px; overflow:hidden; box-shadow:var(--shadow-sm); background:var(--surface2); }
+  .gal-item img{ width:100%; height:260px; object-fit:cover; display:block; transition:transform .5s ease; }
+  .gal-item:hover img{ transform:scale(1.04); }
+  .gal-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:26px 14px 12px;
+    background:linear-gradient(0deg, rgba(10,8,6,.72), transparent);
+    color:#FFF7EA; font-family:'DM Mono', monospace; font-size:11px; letter-spacing:.05em;
+  }
+
+  /* ---------- amenities ---------- */
+  .amenity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(min-width:640px){ .amenity-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media(min-width:900px){ .amenity-grid{ grid-template-columns:repeat(4,1fr); } }
+  .amenity{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:20px 16px; text-align:center; box-shadow:var(--shadow-sm);
+  }
+  .amenity .ic{ font-size:26px; margin-bottom:10px; }
+  .amenity .lb{ font-size:13.5px; color:var(--text); font-weight:500; }
+
+  /* ---------- location & due diligence ---------- */
+  .loc-card{
+    background:var(--surface); border-radius:22px; box-shadow:var(--shadow-md);
+    padding:36px 26px; display:flex; flex-direction:column; gap:22px;
+  }
+  @media(min-width:760px){ .loc-card{ padding:48px; flex-direction:row; align-items:center; gap:40px; } }
+  .loc-address{
+    font-family:'Playfair Display', serif; font-weight:700; font-size:clamp(24px,4vw,32px);
+    color:var(--text); margin:10px 0 16px; line-height:1.3;
+  }
+  .loc-note{ color:var(--muted); font-size:15px; margin-bottom:18px; }
+  .loc-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--terracotta); color:#FFF7EA; text-decoration:none;
+    font-family:'DM Mono', monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    padding:12px 20px; border-radius:999px; box-shadow:var(--shadow-sm);
+  }
+  [data-theme="dark"] .loc-btn{ color:#02141f; font-weight:700; }
+  .loc-figure{ flex:0 0 auto; width:100%; }
+  @media(min-width:760px){ .loc-figure{ width:280px; } }
+  .loc-figure img{ border-radius:16px; box-shadow:var(--shadow-md); aspect-ratio:4/3; object-fit:cover; }
+
+  /* ---------- host ---------- */
+  .host-card{
+    display:flex; flex-direction:column; gap:20px;
+    background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:32px 26px;
+  }
+  @media(min-width:680px){ .host-card{ flex-direction:row; align-items:center; } }
+  .host-avatar{
+    flex:0 0 auto; width:74px; height:74px; border-radius:50%;
+    background:linear-gradient(135deg, var(--gold), var(--terracotta));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif; font-size:28px; color:#fff7ea; font-weight:700;
+  }
+  .host-text h3{ font-size:20px; margin-bottom:6px; }
+  .host-text p{ color:var(--muted); font-size:15px; }
+  .host-tag{
+    font-family:'DM Mono', monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--green); margin-top:8px; display:inline-block;
+  }
+
+  /* ---------- book CTA ---------- */
+  .book-band{
+    background:var(--grad-hero); color:#FFF7EA; text-align:center; padding:70px 20px;
+  }
+  .book-band h2{ color:#FFF7EA; font-size:clamp(28px,5vw,40px); margin:12px 0 14px; }
+  .book-band p{ color:rgba(255,247,234,.85); max-width:52ch; margin:0 auto 26px; }
+  .book-btn{
+    display:inline-block; background:#FFF7EA; color:#241A12;
+    font-family:'DM Mono', monospace; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    padding:15px 30px; border-radius:999px; text-decoration:none; box-shadow:var(--shadow-lg);
+  }
+  .book-fine{ margin-top:16px; font-family:'DM Mono', monospace; font-size:11px; color:rgba(255,247,234,.65); }
+
+  .book-form{ max-width:520px; margin:0 auto; text-align:left; }
+  .hp-field{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+  .book-row{ display:flex; flex-direction:column; gap:12px; margin-bottom:12px; }
+  @media(min-width:560px){ .book-row{ flex-direction:row; } }
+  .book-form input, .book-form textarea{
+    width:100%; font-family:'Outfit', sans-serif; font-size:15px;
+    background:rgba(255,247,234,.12); border:1px solid rgba(255,247,234,.35);
+    color:#FFF7EA; border-radius:10px; padding:12px 14px;
+  }
+  .book-form input::placeholder, .book-form textarea::placeholder{ color:rgba(255,247,234,.6); }
+  .book-form textarea{ margin-bottom:16px; resize:vertical; }
+  .book-form .book-btn{ width:100%; border:none; cursor:pointer; font-size:13px; }
+  .book-form .book-btn:disabled{ opacity:.6; cursor:not-allowed; }
+  #bookStatus.ok{ color:#BFF0D8; }
+  #bookStatus.err{ color:#FFC9B8; }
+
+  footer{
+    text-align:center; padding:44px 20px 60px; border-top:1px solid var(--border);
+    font-family:'DM Mono', monospace; font-size:11.5px; color:var(--muted);
+  }
+  footer .flinks{ margin-top:14px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+  footer a{ color:var(--gold); text-decoration:none; }
+  footer p{ margin:5px 0; }
+
+  @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .gal-item img{ transition:none; } }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">AI&amp;I</div>
+    <div class="nav-links">
+      <a href="#suite">Suite</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#location">Location</a>
+      <a href="#book">Book</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark mode">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<div class="hero" id="suite">
+  <div class="hero-inner">
+    <p class="eyebrow">AI&amp;I Presents · A Managed Guest Suite</p>
+    <h1>Casa Silvas</h1>
+    <p class="sub">A private one-bedroom guest suite with its own entrance, full kitchen, and full bath — tucked into a quiet Tucson neighborhood.</p>
+    <div class="badges">
+      <span class="badge">🚪 Private Entrance</span>
+      <span class="badge">🍳 Full Kitchen</span>
+      <span class="badge">🛏 Sleeps 2–4</span>
+      <span class="badge">🚗 Free Driveway Parking</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="intro-card">
+    <p class="dropcap">Casa Silvas is a fully furnished guest suite built into a private Tucson home — its own bedroom, its own bathroom, its own kitchen, and its own front door, so you come and go without ever crossing paths with the main house.</p>
+    <p>It's been quietly hosting guests off-platform for the better part of a year — long enough for the details to get worked out: fresh linens on every bed, a kitchen that's actually stocked, and a host who answers fast. We're bringing it fully public so more travelers can find it, book it directly, and check us out first.</p>
+  </div>
+</div>
+
+<!-- ================= NEVER GO HUNGRY ================= -->
+<section class="hungry-band">
+  <div class="narrow" style="max-width:1080px;">
+    <div class="hungry-grid">
+      <div class="hungry-photos">
+        <img src="images/kitchen-02-range.webp" alt="Full kitchen with range, microwave, and coffee station">
+        <img src="images/kitchen-01-sink.webp" alt="Kitchenette sink and counter with coffee bar">
+      </div>
+      <div class="hungry-copy">
+        <p class="eyebrow" style="color:var(--terracotta);">The House Rule</p>
+        <h3>You will not go hungry here.</h3>
+        <p>The kitchen isn't a courtesy microwave and a mini-fridge — it's a full working kitchen, stocked before every stay, because the whole point of a guest suite is that you can actually live in it for a few days.</p>
+        <ul class="hungry-list">
+          <li>Full-size range, oven, and microwave — cook a real meal, not just reheat one</li>
+          <li>Coffee maker <em>and</em> a Keurig, plus starter coffee, tea, and sugar</li>
+          <li>Cookware, dishes, and utensils for up to four people</li>
+          <li>Snacks and welcome basics stocked before you check in</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Exhibit A</p>
+      <h2>Look Before You Book</h2>
+      <p>Every room, shot as it actually looks — no wide-angle tricks, no stock furniture. This is the space you'll be staying in.</p>
+    </div>
+
+    <div class="gal-group">
+      <h3>Bedroom</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/bedroom-01.webp" alt="Bedroom with floral bedding"><figcaption class="gal-cap">Queen bed, layered linens</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-02.webp" alt="Bedroom with navy throw"><figcaption class="gal-cap">Made up fresh for every guest</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-04-dresser.webp" alt="Dresser with mirror and lamps"><figcaption class="gal-cap">Dresser, mirror, closet space</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-03-tv.webp" alt="Bedroom TV stand and rug"><figcaption class="gal-cap">Smart TV on a rolling stand</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gal-group">
+      <h3>Kitchen &amp; Dining</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/kitchen-02-range.webp" alt="Kitchen range and cabinetry"><figcaption class="gal-cap">Full range, microwave, coffee bar</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-01-sink.webp" alt="Kitchen sink and counter"><figcaption class="gal-cap">Deep sink, prep counter</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-04-nook.webp" alt="Small dining nook with marble table"><figcaption class="gal-cap">Dining nook for two</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-03-pantry.webp" alt="Tall pantry cabinet and mini-fridge"><figcaption class="gal-cap">Pantry storage, mini-fridge</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gal-group">
+      <h3>Bathroom</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/bath-01-vanity.webp" alt="Bathroom vanity and toilet"><figcaption class="gal-cap">Full bath, private</figcaption></figure>
+        <figure class="gal-item"><img src="images/bath-02-shower.webp" alt="Tiled shower stall"><figcaption class="gal-cap">Walk-in tiled shower</figcaption></figure>
+        <figure class="gal-item"><img src="images/bath-03-linens.webp" alt="Shelf with folded towels"><figcaption class="gal-cap">Fresh towels, stocked shelf</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gal-group">
+      <h3>Living Room</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/living-01-media.webp" alt="Living room media wall"><figcaption class="gal-cap">TV, fireplace, styled shelving</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-03-sofas.webp" alt="Seating area with sofas"><figcaption class="gal-cap">Room to actually relax</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-02-recliner.webp" alt="Reclining loveseat and A/C unit"><figcaption class="gal-cap">Reclining seating, mini-split A/C</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-04-wide.webp" alt="Wide view of the living room"><figcaption class="gal-cap">The full room, wide view</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-05-sofas.webp" alt="Second angle of the living room seating"><figcaption class="gal-cap">Seating, second angle</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gal-group">
+      <h3>Outdoors &amp; Extras</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/entry-01-night.webp" alt="Private entrance at night"><figcaption class="gal-cap">Your own front door</figcaption></figure>
+        <figure class="gal-item"><img src="images/extra-01.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">The grounds</figcaption></figure>
+        <figure class="gal-item"><img src="images/extra-02.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">Shared outdoor space</figcaption></figure>
+        <figure class="gal-item"><img src="images/extra-03.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">More of the yard</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AMENITIES ================= -->
+<section id="amenities" style="background:var(--surface2);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What's Included</p>
+      <h2>Everything You'd Actually Pack For</h2>
+    </div>
+    <div class="amenity-grid">
+      <div class="amenity"><div class="ic">🔑</div><div class="lb">Private Keyed Entry</div></div>
+      <div class="amenity"><div class="ic">📶</div><div class="lb">High-Speed Wifi</div></div>
+      <div class="amenity"><div class="ic">🧊</div><div class="lb">Mini-Split A/C &amp; Heat</div></div>
+      <div class="amenity"><div class="ic">🍳</div><div class="lb">Full Kitchen</div></div>
+      <div class="amenity"><div class="ic">☕</div><div class="lb">Coffee + Keurig</div></div>
+      <div class="amenity"><div class="ic">🚿</div><div class="lb">Private Full Bath</div></div>
+      <div class="amenity"><div class="ic">🧺</div><div class="lb">Fresh Linens &amp; Towels</div></div>
+      <div class="amenity"><div class="ic">🚗</div><div class="lb">Free Driveway Parking</div></div>
+      <div class="amenity"><div class="ic">📺</div><div class="lb">Smart TV</div></div>
+      <div class="amenity"><div class="ic">🧴</div><div class="lb">Stocked Toiletries</div></div>
+      <div class="amenity"><div class="ic">🛎</div><div class="lb">Fast Host Response</div></div>
+      <div class="amenity"><div class="ic">🐾</div><div class="lb">Pet-Friendly on Request</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOCATION / DUE DILIGENCE ================= -->
+<section id="location">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Transparency, On Purpose</p>
+      <h2>We Publish Our Address Up Front</h2>
+      <p>Most listings hide the exact address until after you book. We don't. Look up the neighborhood, map your route, and do your own due diligence before you commit — that's the point.</p>
+    </div>
+    <div class="loc-card">
+      <div class="loc-figure">
+        <img src="images/entry-01-night.webp" alt="Front entrance of the property">
+      </div>
+      <div>
+        <p class="eyebrow">The Address</p>
+        <p class="loc-address">827 S Brown St<br>Tucson, AZ 85710</p>
+        <p class="loc-note">Quiet residential street on Tucson's east side. Guest suite is a private, separate entrance on the same lot as the main house — you won't be walking through anyone's living room to get to yours.</p>
+        <a class="loc-btn" href="https://www.google.com/maps/search/?api=1&query=827+S+Brown+St+Tucson+AZ+85710" target="_blank" rel="noopener">View on Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOST ================= -->
+<section style="background:var(--surface2); padding-top:0;">
+  <div class="wrap">
+    <div class="host-card">
+      <div class="host-avatar">L</div>
+      <div class="host-text">
+        <h3>Your Host, Linda S.</h3>
+        <p>Linda owns the home and has been hosting guests in this suite directly for close to a year. AI&amp;I now manages the calendar, messaging, and day-to-day so bookings and communication stay quick and consistent — Linda still sets the house rules, and it's still her home.</p>
+        <span class="host-tag">● Managed by AI&amp;I</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOK CTA ================= -->
+<section class="book-band" id="book">
+  <p class="eyebrow" style="color:rgba(255,247,234,.75);">Ready When You Are</p>
+  <h2>Come Stay at Casa Silvas</h2>
+  <p>Send your dates and we'll confirm availability and walk you through check-in.</p>
+
+  <form id="bookForm" class="book-form" novalidate>
+    <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="book-row">
+      <input type="text" name="name" placeholder="Full name" required>
+      <input type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="book-row">
+      <input type="tel" name="phone" placeholder="Phone (optional)">
+      <input type="date" name="check_in" placeholder="Check-in">
+      <input type="date" name="check_out" placeholder="Check-out">
+    </div>
+    <textarea name="message" placeholder="Anything we should know? (optional)" rows="3"></textarea>
+    <button type="submit" class="book-btn" id="bookSubmit">Request to Book →</button>
+    <p id="bookStatus" class="book-fine" role="status"></p>
+  </form>
+</section>
+
+<footer>
+  <p><strong style="color:var(--text);">AI&amp;I</strong> — Co-Listing, Managed Right.</p>
+  <p>Casa Silvas is independently owned; AI&amp;I manages bookings and guest communication on the owner's behalf.</p>
+  <div class="flinks">
+    <a href="../handoff-guide/index.html">Our Co-Host Playbook →</a>
+  </div>
+</footer>
+
+<script>
+  var BOOKING_ENDPOINT = "https://hgbiuqkjozruytgsdinc.supabase.co/functions/v1/casa-silvas-book";
+
+  (function(){
+    var form = document.getElementById('bookForm');
+    var status = document.getElementById('bookStatus');
+    var btn = document.getElementById('bookSubmit');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = Object.fromEntries(new FormData(form).entries());
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      status.textContent = '';
+      status.className = 'book-fine';
+
+      fetch(BOOKING_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function(res){ return res.json().then(function(body){ return { ok: res.ok, body: body }; }); })
+        .then(function(r){
+          if (r.ok) {
+            form.reset();
+            status.textContent = "Request sent — we'll get back to you shortly.";
+            status.className = 'book-fine ok';
+          } else {
+            status.textContent = r.body.error || 'Something went wrong. Please try again.';
+            status.className = 'book-fine err';
+          }
+        })
+        .catch(function(){
+          status.textContent = 'Network error — please try again in a moment.';
+          status.className = 'book-fine err';
+        })
+        .finally(function(){
+          btn.disabled = false;
+          btn.textContent = 'Request to Book →';
+        });
+    });
+  })();
+</script>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var label = document.getElementById('themeLabel');
+    var moon = toggle.querySelector('.moon');
+    var sun = toggle.querySelector('.sun');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var current = prefersDark ? 'dark' : 'light';
+    apply();
+
+    toggle.addEventListener('click', function(){
+      current = current === 'dark' ? 'light' : 'dark';
+      apply();
+    });
+
+    function apply(){
+      root.setAttribute('data-theme', current);
+      label.textContent = current === 'dark' ? 'Light' : 'Dark';
+      moon.style.display = current === 'dark' ? 'none' : 'block';
+      sun.style.display = current === 'dark' ? 'block' : 'none';
+    }
+  })();
+</script>
+
+</body>
+</html>
