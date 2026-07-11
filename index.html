@@ -270,6 +270,49 @@
   footer p{ margin:5px 0; }
 
   @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .gal-item img{ transition:none; } }
+
+  /* ---------- lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(8,6,4,0.94);
+    display:none; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox img{
+    max-width:min(92vw, 1100px); max-height:82vh;
+    width:auto; height:auto;
+    object-fit:contain;
+    border-radius:8px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5);
+  }
+  .lightbox .lb-cap{
+    position:absolute; left:0; right:0; bottom:22px;
+    text-align:center; color:#FFF7EA;
+    font-family:'DM Mono', monospace; font-size:12px; letter-spacing:.05em;
+  }
+  .lb-btn{
+    position:fixed; top:22px; right:24px;
+    background:rgba(255,247,234,.12); border:1px solid rgba(255,247,234,.3);
+    color:#FFF7EA; width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:20px; line-height:1;
+  }
+  .lb-nav{
+    position:fixed; top:50%; transform:translateY(-50%);
+    background:rgba(255,247,234,.12); border:1px solid rgba(255,247,234,.3);
+    color:#FFF7EA; width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:22px;
+  }
+  .lb-prev{ left:16px; }
+  .lb-next{ right:16px; }
+  @media(max-width:640px){
+    .lb-nav{ width:40px; height:40px; font-size:18px; }
+    .lb-prev{ left:8px; } .lb-next{ right:8px; }
+    .lb-btn{ top:14px; right:14px; }
+  }
+  .gal-item{ cursor:pointer; }
 </style>
 </head>
 <body>
@@ -319,8 +362,8 @@
   <div class="narrow" style="max-width:1080px;">
     <div class="hungry-grid">
       <div class="hungry-photos">
-        <img src="images/kitchen-02-range.webp" alt="Full kitchen with range, microwave, and coffee station">
-        <img src="images/kitchen-01-sink.webp" alt="Kitchenette sink and counter with coffee bar">
+        <img src="images/kitchen-range-and-appliances.webp" alt="Full kitchen with range, microwave, and coffee station">
+        <img src="images/kitchen-sink-and-entry.webp" alt="Kitchenette sink and counter with coffee bar">
       </div>
       <div class="hungry-copy">
         <p class="eyebrow" style="color:var(--terracotta);">The House Rule</p>
@@ -343,56 +386,63 @@
     <div class="section-head">
       <p class="eyebrow">Exhibit A</p>
       <h2>Look Before You Book</h2>
-      <p>Every room, shot as it actually looks — no wide-angle tricks, no stock furniture. This is the space you'll be staying in.</p>
+      <p>Every room, shot as it actually looks — no wide-angle tricks, no stock furniture. This is the space you'll be staying in. Tap any photo for the full-size view.</p>
     </div>
 
     <div class="gal-group">
       <h3>Bedroom</h3>
       <div class="gal-grid">
-        <figure class="gal-item"><img src="images/bedroom-01.webp" alt="Bedroom with floral bedding"><figcaption class="gal-cap">Queen bed, layered linens</figcaption></figure>
-        <figure class="gal-item"><img src="images/bedroom-02.webp" alt="Bedroom with navy throw"><figcaption class="gal-cap">Made up fresh for every guest</figcaption></figure>
-        <figure class="gal-item"><img src="images/bedroom-04-dresser.webp" alt="Dresser with mirror and lamps"><figcaption class="gal-cap">Dresser, mirror, closet space</figcaption></figure>
-        <figure class="gal-item"><img src="images/bedroom-03-tv.webp" alt="Bedroom TV stand and rug"><figcaption class="gal-cap">Smart TV on a rolling stand</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-wide-with-dresser.webp" alt="Bedroom, wide view with dresser in the background" data-lightbox><figcaption class="gal-cap">Wide view, dresser in the background</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-bed-closeup.webp" alt="Close view of the made-up bed" data-lightbox><figcaption class="gal-cap">Made up fresh for every guest</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-tv-stand-and-rug.webp" alt="Bedroom TV stand and area rug" data-lightbox><figcaption class="gal-cap">Smart TV on a rolling stand</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-dresser-mirror.webp" alt="Dresser with mirror" data-lightbox><figcaption class="gal-cap">Dresser and mirror</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-dresser-lamps.webp" alt="Dresser with lamps, closer view" data-lightbox><figcaption class="gal-cap">Dresser, closer view</figcaption></figure>
       </div>
     </div>
 
     <div class="gal-group">
-      <h3>Kitchen &amp; Dining</h3>
+      <h3>Kitchen</h3>
       <div class="gal-grid">
-        <figure class="gal-item"><img src="images/kitchen-02-range.webp" alt="Kitchen range and cabinetry"><figcaption class="gal-cap">Full range, microwave, coffee bar</figcaption></figure>
-        <figure class="gal-item"><img src="images/kitchen-01-sink.webp" alt="Kitchen sink and counter"><figcaption class="gal-cap">Deep sink, prep counter</figcaption></figure>
-        <figure class="gal-item"><img src="images/kitchen-04-nook.webp" alt="Small dining nook with marble table"><figcaption class="gal-cap">Dining nook for two</figcaption></figure>
-        <figure class="gal-item"><img src="images/kitchen-03-pantry.webp" alt="Tall pantry cabinet and mini-fridge"><figcaption class="gal-cap">Pantry storage, mini-fridge</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-range-and-appliances.webp" alt="Kitchen range, microwave, coffee maker, and fridge" data-lightbox><figcaption class="gal-cap">Full range, microwave, coffee bar</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-sink-and-entry.webp" alt="Kitchen sink and counter near the front entry" data-lightbox><figcaption class="gal-cap">Sink, prep counter, entry</figcaption></figure>
+        <figure class="gal-item"><img src="images/kitchen-pantry-and-minifridge.webp" alt="Tall pantry cabinet and mini-fridge" data-lightbox><figcaption class="gal-cap">Pantry storage, mini-fridge</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gal-group">
+      <h3>Dining &amp; Reading Nook</h3>
+      <div class="gal-grid">
+        <figure class="gal-item"><img src="images/dining-nook-recliner.webp" alt="Reclining loveseat next to the dining table" data-lightbox><figcaption class="gal-cap">Reclining seating, mini-split A/C</figcaption></figure>
+        <figure class="gal-item"><img src="images/dining-nook-table.webp" alt="Small marble dining table and stools" data-lightbox><figcaption class="gal-cap">Marble table for two</figcaption></figure>
       </div>
     </div>
 
     <div class="gal-group">
       <h3>Bathroom</h3>
       <div class="gal-grid">
-        <figure class="gal-item"><img src="images/bath-01-vanity.webp" alt="Bathroom vanity and toilet"><figcaption class="gal-cap">Full bath, private</figcaption></figure>
-        <figure class="gal-item"><img src="images/bath-02-shower.webp" alt="Tiled shower stall"><figcaption class="gal-cap">Walk-in tiled shower</figcaption></figure>
-        <figure class="gal-item"><img src="images/bath-03-linens.webp" alt="Shelf with folded towels"><figcaption class="gal-cap">Fresh towels, stocked shelf</figcaption></figure>
+        <figure class="gal-item"><img src="images/bath-vanity-and-toilet.webp" alt="Bathroom vanity and toilet" data-lightbox><figcaption class="gal-cap">Full bath, private</figcaption></figure>
+        <figure class="gal-item"><img src="images/bath-shower.webp" alt="Tiled shower stall" data-lightbox><figcaption class="gal-cap">Walk-in tiled shower</figcaption></figure>
+        <figure class="gal-item"><img src="images/bath-towel-shelf.webp" alt="Shelf with folded towels and toiletries" data-lightbox><figcaption class="gal-cap">Fresh towels, stocked shelf</figcaption></figure>
       </div>
     </div>
 
     <div class="gal-group">
       <h3>Living Room</h3>
       <div class="gal-grid">
-        <figure class="gal-item"><img src="images/living-01-media.webp" alt="Living room media wall"><figcaption class="gal-cap">TV, fireplace, styled shelving</figcaption></figure>
-        <figure class="gal-item"><img src="images/living-03-sofas.webp" alt="Seating area with sofas"><figcaption class="gal-cap">Room to actually relax</figcaption></figure>
-        <figure class="gal-item"><img src="images/living-02-recliner.webp" alt="Reclining loveseat and A/C unit"><figcaption class="gal-cap">Reclining seating, mini-split A/C</figcaption></figure>
-        <figure class="gal-item"><img src="images/living-04-wide.webp" alt="Wide view of the living room"><figcaption class="gal-cap">The full room, wide view</figcaption></figure>
-        <figure class="gal-item"><img src="images/living-05-sofas.webp" alt="Second angle of the living room seating"><figcaption class="gal-cap">Seating, second angle</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-media-wall.webp" alt="Living room media wall with TV and fireplace" data-lightbox><figcaption class="gal-cap">TV, fireplace, styled shelving</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-wide-with-barn-door.webp" alt="Wide view of the living room with barn door" data-lightbox><figcaption class="gal-cap">The full room, wide view</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-sofas-and-chair.webp" alt="Two sofas and a swivel chair" data-lightbox><figcaption class="gal-cap">Room to actually relax</figcaption></figure>
+        <figure class="gal-item"><img src="images/living-sofas-angle-two.webp" alt="Living room seating, second angle" data-lightbox><figcaption class="gal-cap">Seating, second angle</figcaption></figure>
       </div>
     </div>
 
     <div class="gal-group">
-      <h3>Outdoors &amp; Extras</h3>
+      <h3>Entry &amp; Outdoors</h3>
       <div class="gal-grid">
-        <figure class="gal-item"><img src="images/entry-01-night.webp" alt="Private entrance at night"><figcaption class="gal-cap">Your own front door</figcaption></figure>
-        <figure class="gal-item"><img src="images/extra-01.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">The grounds</figcaption></figure>
-        <figure class="gal-item"><img src="images/extra-02.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">Shared outdoor space</figcaption></figure>
-        <figure class="gal-item"><img src="images/extra-03.webp" alt="Outdoor and grounds view"><figcaption class="gal-cap">More of the yard</figcaption></figure>
+        <figure class="gal-item"><img src="images/entry-front-door-at-night.webp" alt="Private entrance at night" data-lightbox><figcaption class="gal-cap">Your own front door</figcaption></figure>
+        <figure class="gal-item"><img src="images/outdoor-yard-and-turf.webp" alt="Backyard with turf and trees" data-lightbox><figcaption class="gal-cap">The yard</figcaption></figure>
+        <figure class="gal-item"><img src="images/outdoor-pool-and-toys.webp" alt="Pool area" data-lightbox><figcaption class="gal-cap">Pool area</figcaption></figure>
+        <figure class="gal-item"><img src="images/outdoor-pool-mosaic-tile.webp" alt="Pool close-up showing mosaic tile" data-lightbox><figcaption class="gal-cap">Pool, mosaic detail</figcaption></figure>
       </div>
     </div>
   </div>
@@ -432,7 +482,7 @@
     </div>
     <div class="loc-card">
       <div class="loc-figure">
-        <img src="images/entry-01-night.webp" alt="Front entrance of the property">
+        <img src="images/entry-front-door-at-night.webp" alt="Front entrance of the property">
       </div>
       <div>
         <p class="eyebrow">The Address</p>
@@ -485,7 +535,7 @@
   <p><strong style="color:var(--text);">AI&amp;I</strong> — Co-Listing, Managed Right.</p>
   <p>Casa Silvas is independently owned; AI&amp;I manages bookings and guest communication on the owner's behalf.</p>
   <div class="flinks">
-    <a href="../handoff-guide/index.html">Our Co-Host Playbook →</a>
+    <span>Internal team resources coming soon</span>
   </div>
 </footer>
 
@@ -536,10 +586,51 @@
   })();
 </script>
 
+<div class="lightbox" id="lightbox">
+  <button class="lb-btn" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next photo">›</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
 <script>
   (function(){
-    var root = document.documentElement;
-    var toggle = document.getElementById('themeToggle');
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lbImg');
+    var lbCap = document.getElementById('lbCap');
+    var idx = 0;
+
+    function openAt(i){
+      idx = (i + items.length) % items.length;
+      var img = items[idx];
+      lbImg.src = img.src;
+      lbImg.alt = img.alt || '';
+      var fig = img.closest('figure');
+      var cap = fig ? fig.querySelector('figcaption') : null;
+      lbCap.textContent = cap ? cap.textContent : (img.alt || '');
+      lb.classList.add('open');
+    }
+    function close(){ lb.classList.remove('open'); lbImg.src=''; }
+
+    items.forEach(function(img, i){
+      img.addEventListener('click', function(){ openAt(i); });
+    });
+    document.getElementById('lbClose').addEventListener('click', close);
+    document.getElementById('lbPrev').addEventListener('click', function(){ openAt(idx - 1); });
+    document.getElementById('lbNext').addEventListener('click', function(){ openAt(idx + 1); });
+    lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+    document.addEventListener('keydown', function(e){
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') openAt(idx - 1);
+      if (e.key === 'ArrowRight') openAt(idx + 1);
+    });
+  })();
+</script>
+
+<script>
     var label = document.getElementById('themeLabel');
     var moon = toggle.querySelector('.moon');
     var sun = toggle.querySelector('.sun');
