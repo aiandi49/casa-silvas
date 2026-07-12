@@ -530,8 +530,8 @@
     </div>
     <div class="book-row">
       <input type="tel" name="phone" placeholder="Phone (optional)">
-      <input type="date" name="check_in" placeholder="Check-in">
-      <input type="date" name="check_out" placeholder="Check-out">
+      <input type="date" name="check_in" id="checkInField" placeholder="Check-in">
+      <input type="date" name="check_out" id="checkOutField" placeholder="Check-out">
     </div>
     <textarea name="message" placeholder="Anything we should know? (optional)" rows="3"></textarea>
     <button type="submit" class="book-btn" id="bookSubmit">Request to Book →</button>
@@ -554,6 +554,31 @@
     var form = document.getElementById('bookForm');
     var status = document.getElementById('bookStatus');
     var btn = document.getElementById('bookSubmit');
+    var checkIn = document.getElementById('checkInField');
+    var checkOut = document.getElementById('checkOutField');
+
+    function toISODate(d){
+      var tz = d.getTimezoneOffset() * 60000;
+      return new Date(d - tz).toISOString().slice(0, 10);
+    }
+    function addDays(iso, n){
+      var d = new Date(iso + 'T00:00:00');
+      d.setDate(d.getDate() + n);
+      return toISODate(d);
+    }
+
+    var todayISO = toISODate(new Date());
+    checkIn.min = todayISO;
+    checkOut.min = todayISO;
+
+    checkIn.addEventListener('change', function(){
+      if (!checkIn.value) return;
+      var minCheckout = addDays(checkIn.value, 1);
+      checkOut.min = minCheckout;
+      if (checkOut.value && checkOut.value < minCheckout) {
+        checkOut.value = minCheckout;
+      }
+    });
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
