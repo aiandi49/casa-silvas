@@ -195,7 +195,7 @@
     border-radius:50%;
     background:radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--gold) 22%, transparent), color-mix(in srgb, var(--terracotta) 10%, transparent));
     display:flex; align-items:center; justify-content:center;
-    overflow:hidden;
+    overflow:hidden; cursor:pointer;
   }
   .amenity .ic-wrap img{ width:60%; height:60%; object-fit:contain; }
   .amenity .lb{ font-size:13.5px; color:var(--text); font-weight:500; }
@@ -232,7 +232,7 @@
     flex:0 0 auto; width:74px; height:74px; border-radius:50%;
     background:linear-gradient(135deg, var(--gold), var(--terracotta));
     display:flex; align-items:center; justify-content:center;
-    font-family:'Playfair Display', serif; font-size:28px; color:#fff7ea; font-weight:700;
+    font-family:'Playfair Display', serif; font-size:19px; color:#fff7ea; font-weight:700; letter-spacing:-0.5px;
   }
   .host-text h3{ font-size:20px; margin-bottom:6px; }
   .host-text p{ color:var(--muted); font-size:15px; }
@@ -404,8 +404,7 @@
         <figure class="gal-item"><img src="images/bedroom-wide-with-dresser.webp" alt="Bedroom, wide view with dresser in the background" data-lightbox><figcaption class="gal-cap">Wide view, dresser in the background</figcaption></figure>
         <figure class="gal-item"><img src="images/bedroom-bed-closeup.webp" alt="Close view of the made-up bed" data-lightbox><figcaption class="gal-cap">Made up fresh for every guest</figcaption></figure>
         <figure class="gal-item"><img src="images/bedroom-tv-stand-and-rug.webp" alt="Bedroom TV stand and area rug" data-lightbox><figcaption class="gal-cap">Smart TV on a rolling stand</figcaption></figure>
-        <figure class="gal-item"><img src="images/bedroom-dresser-mirror.webp" alt="Dresser with mirror" data-lightbox><figcaption class="gal-cap">Dresser and mirror</figcaption></figure>
-        <figure class="gal-item"><img src="images/bedroom-dresser-lamps.webp" alt="Dresser with lamps, closer view" data-lightbox><figcaption class="gal-cap">Dresser, closer view</figcaption></figure>
+        <figure class="gal-item"><img src="images/bedroom-dresser-lamps.webp" alt="Dresser with mirror and lamps" data-lightbox><figcaption class="gal-cap">Dresser and mirror</figcaption></figure>
       </div>
     </div>
 
@@ -465,18 +464,18 @@
       <h2>Everything You'd Actually Pack For</h2>
     </div>
     <div class="amenity-grid">
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-private-entry.webp" alt="Private keyed entry" loading="lazy"></div><div class="lb">Private Keyed Entry</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-wifi.webp" alt="High-speed wifi" loading="lazy"></div><div class="lb">High-Speed Wifi</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-ac-heat.webp" alt="Mini-split A/C and heat" loading="lazy"></div><div class="lb">Mini-Split A/C &amp; Heat</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-kitchen.webp" alt="Full kitchen" loading="lazy"></div><div class="lb">Full Kitchen</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-coffee.webp" alt="Coffee and Keurig" loading="lazy"></div><div class="lb">Coffee + Keurig</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-bath.webp" alt="Private full bath" loading="lazy"></div><div class="lb">Private Full Bath</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-linens.webp" alt="Fresh linens and towels" loading="lazy"></div><div class="lb">Fresh Linens &amp; Towels</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-parking.webp" alt="Free driveway parking" loading="lazy"></div><div class="lb">Free Driveway Parking</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-tv.webp" alt="Smart TV" loading="lazy"></div><div class="lb">Smart TV</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-toiletries.webp" alt="Stocked toiletries" loading="lazy"></div><div class="lb">Stocked Toiletries</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-response.webp" alt="Fast host response" loading="lazy"></div><div class="lb">Fast Host Response</div></div>
-      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-pets.webp" alt="Pet-friendly on request" loading="lazy"></div><div class="lb">Pet-Friendly on Request</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-private-entry.webp" alt="Private keyed entry" loading="lazy" data-lightbox></div><div class="lb">Private Keyed Entry</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-wifi.webp" alt="High-speed wifi" loading="lazy" data-lightbox></div><div class="lb">High-Speed Wifi</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-ac-heat.webp" alt="Mini-split A/C and heat" loading="lazy" data-lightbox></div><div class="lb">Mini-Split A/C &amp; Heat</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-kitchen.webp" alt="Full kitchen" loading="lazy" data-lightbox></div><div class="lb">Full Kitchen</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-coffee.webp" alt="Coffee and Keurig" loading="lazy" data-lightbox></div><div class="lb">Coffee + Keurig</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-bath.webp" alt="Private full bath" loading="lazy" data-lightbox></div><div class="lb">Private Full Bath</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-linens.webp" alt="Fresh linens and towels" loading="lazy" data-lightbox></div><div class="lb">Fresh Linens &amp; Towels</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-parking.webp" alt="Free driveway parking" loading="lazy" data-lightbox></div><div class="lb">Free Driveway Parking</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-tv.webp" alt="Smart TV" loading="lazy" data-lightbox></div><div class="lb">Smart TV</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-toiletries.webp" alt="Stocked toiletries" loading="lazy" data-lightbox></div><div class="lb">Stocked Toiletries</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-response.webp" alt="Fast host response" loading="lazy" data-lightbox></div><div class="lb">Fast Host Response</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-pets.webp" alt="Pet-friendly on request" loading="lazy" data-lightbox></div><div class="lb">Pet-Friendly on Request</div></div>
     </div>
   </div>
 </section>
@@ -507,10 +506,10 @@
 <section style="background:var(--surface2); padding-top:0;">
   <div class="wrap">
     <div class="host-card">
-      <div class="host-avatar">L</div>
+      <div class="host-avatar">E&amp;L</div>
       <div class="host-text">
-        <h3>Your Host, Linda S.</h3>
-        <p>Linda owns the home and has been hosting guests in this suite directly for close to a year. AI&amp;I now manages the calendar, messaging, and day-to-day so bookings and communication stay quick and consistent — Linda still sets the house rules, and it's still her home.</p>
+        <h3>Your Hosts, Elsa &amp; Linda S.</h3>
+        <p>Elsa and Linda own the home and have been hosting guests in this suite directly for close to a year. AI&amp;I now manages the calendar, messaging, and day-to-day so bookings and communication stay quick and consistent — Elsa and Linda still set the house rules, and it's still their home.</p>
         <span class="host-tag">● Managed by AI&amp;I</span>
       </div>
     </div>
@@ -618,6 +617,10 @@
       lbImg.alt = img.alt || '';
       var fig = img.closest('figure');
       var cap = fig ? fig.querySelector('figcaption') : null;
+      if (!cap) {
+        var card = img.closest('.amenity');
+        if (card) cap = card.querySelector('.lb');
+      }
       lbCap.textContent = cap ? cap.textContent : (img.alt || '');
       lb.classList.add('open');
     }
