@@ -181,14 +181,23 @@
   }
 
   /* ---------- amenities ---------- */
-  .amenity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .amenity-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   @media(min-width:640px){ .amenity-grid{ grid-template-columns:repeat(3,1fr); } }
   @media(min-width:900px){ .amenity-grid{ grid-template-columns:repeat(4,1fr); } }
   .amenity{
-    background:var(--surface); border:1px solid var(--border); border-radius:14px;
-    padding:20px 16px; text-align:center; box-shadow:var(--shadow-sm);
+    background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    padding:22px 16px 20px; text-align:center; box-shadow:var(--shadow-sm);
+    transition:transform .25s ease, box-shadow .25s ease;
   }
-  .amenity .ic{ font-size:26px; margin-bottom:10px; }
+  .amenity:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); }
+  .amenity .ic-wrap{
+    width:76px; height:76px; margin:0 auto 14px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--gold) 22%, transparent), color-mix(in srgb, var(--terracotta) 10%, transparent));
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .amenity .ic-wrap img{ width:60%; height:60%; object-fit:contain; }
   .amenity .lb{ font-size:13.5px; color:var(--text); font-weight:500; }
 
   /* ---------- location & due diligence ---------- */
@@ -456,18 +465,18 @@
       <h2>Everything You'd Actually Pack For</h2>
     </div>
     <div class="amenity-grid">
-      <div class="amenity"><div class="ic">🔑</div><div class="lb">Private Keyed Entry</div></div>
-      <div class="amenity"><div class="ic">📶</div><div class="lb">High-Speed Wifi</div></div>
-      <div class="amenity"><div class="ic">🧊</div><div class="lb">Mini-Split A/C &amp; Heat</div></div>
-      <div class="amenity"><div class="ic">🍳</div><div class="lb">Full Kitchen</div></div>
-      <div class="amenity"><div class="ic">☕</div><div class="lb">Coffee + Keurig</div></div>
-      <div class="amenity"><div class="ic">🚿</div><div class="lb">Private Full Bath</div></div>
-      <div class="amenity"><div class="ic">🧺</div><div class="lb">Fresh Linens &amp; Towels</div></div>
-      <div class="amenity"><div class="ic">🚗</div><div class="lb">Free Driveway Parking</div></div>
-      <div class="amenity"><div class="ic">📺</div><div class="lb">Smart TV</div></div>
-      <div class="amenity"><div class="ic">🧴</div><div class="lb">Stocked Toiletries</div></div>
-      <div class="amenity"><div class="ic">🛎</div><div class="lb">Fast Host Response</div></div>
-      <div class="amenity"><div class="ic">🐾</div><div class="lb">Pet-Friendly on Request</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-private-entry.webp" alt="Private keyed entry" loading="lazy"></div><div class="lb">Private Keyed Entry</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-wifi.webp" alt="High-speed wifi" loading="lazy"></div><div class="lb">High-Speed Wifi</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-ac-heat.webp" alt="Mini-split A/C and heat" loading="lazy"></div><div class="lb">Mini-Split A/C &amp; Heat</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-kitchen.webp" alt="Full kitchen" loading="lazy"></div><div class="lb">Full Kitchen</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-coffee.webp" alt="Coffee and Keurig" loading="lazy"></div><div class="lb">Coffee + Keurig</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-bath.webp" alt="Private full bath" loading="lazy"></div><div class="lb">Private Full Bath</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-linens.webp" alt="Fresh linens and towels" loading="lazy"></div><div class="lb">Fresh Linens &amp; Towels</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-parking.webp" alt="Free driveway parking" loading="lazy"></div><div class="lb">Free Driveway Parking</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-tv.webp" alt="Smart TV" loading="lazy"></div><div class="lb">Smart TV</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-toiletries.webp" alt="Stocked toiletries" loading="lazy"></div><div class="lb">Stocked Toiletries</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-response.webp" alt="Fast host response" loading="lazy"></div><div class="lb">Fast Host Response</div></div>
+      <div class="amenity"><div class="ic-wrap"><img src="images/amenities/amenity-pets.webp" alt="Pet-friendly on request" loading="lazy"></div><div class="lb">Pet-Friendly on Request</div></div>
     </div>
   </div>
 </section>
@@ -631,6 +640,9 @@
 </script>
 
 <script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
     var label = document.getElementById('themeLabel');
     var moon = toggle.querySelector('.moon');
     var sun = toggle.querySelector('.sun');
